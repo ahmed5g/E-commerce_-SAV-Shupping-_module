@@ -29,7 +29,7 @@ public class RequestApproval {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Request")
-    private Request requests;
+    private Request request;
 
 
 
@@ -44,7 +44,7 @@ public class RequestApproval {
         this.date = date;
         this.approvedBy = approvedBy;
         RequestStatus = requestStatus;
-        this.requests = request;
+        this.request = request;
     }
 
     //Generate Getters and setters
@@ -83,11 +83,11 @@ public class RequestApproval {
     }
 
     public Request getRequest() {
-        return requests;
+        return request;
     }
 
     public void setRequest(Request request) {
-        this.requests = request;
+        this.request = request;
     }
 
     //To string
@@ -100,7 +100,7 @@ public class RequestApproval {
                 ", date=" + date +
                 ", approvedBy='" + approvedBy + '\'' +
                 ", RequestStatus=" + RequestStatus +
-                ", request=" + requests +
+                ", request=" + request +
                 '}';
     }
 }
