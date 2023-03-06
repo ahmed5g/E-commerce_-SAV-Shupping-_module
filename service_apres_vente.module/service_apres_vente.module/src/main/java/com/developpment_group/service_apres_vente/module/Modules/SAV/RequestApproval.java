@@ -11,8 +11,8 @@ enum status{
     REJECTED,
 }
 
-@Entity(name = "RefundApproval")
-public class RefundApproval {
+@Entity(name = "RequestApproval")
+public class RequestApproval {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "approval_id")
@@ -28,26 +28,27 @@ public class RefundApproval {
     private status RequestStatus;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "refundRequest_id")
-    private RefundRequest refundRequest;
+    @JoinColumn(name = "Request")
+    private Request request;
 
 
 
     //Constractor
 
-    public RefundApproval() {
+
+    public RequestApproval() {
     }
 
-    public RefundApproval(int approvalId, LocalDate date, String approvedBy, status requestStatus, RefundRequest refund) {
+    public RequestApproval(int approvalId, LocalDate date, String approvedBy, status requestStatus, Request request) {
         this.approvalId = approvalId;
         this.date = date;
         this.approvedBy = approvedBy;
         RequestStatus = requestStatus;
-        refundRequest = refundRequest;
+        this.request = request;
     }
 
+    //Generate Getters and setters
 
-    // getters and setters
 
     public int getApprovalId() {
         return approvalId;
@@ -73,19 +74,33 @@ public class RefundApproval {
         this.approvedBy = approvedBy;
     }
 
-    public RefundRequest getRefund() {
-        return refundRequest;
-    }
-
-    public void setRefund(RefundRequest refund) {
-        refundRequest = refund;
-    }
-
     public status getRequestStatus() {
         return RequestStatus;
     }
 
     public void setRequestStatus(status requestStatus) {
         RequestStatus = requestStatus;
+    }
+
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
+    //To string
+
+
+    @Override
+    public String toString() {
+        return "RequestApproval{" +
+                "approvalId=" + approvalId +
+                ", date=" + date +
+                ", approvedBy='" + approvedBy + '\'' +
+                ", RequestStatus=" + RequestStatus +
+                ", request=" + request +
+                '}';
     }
 }
