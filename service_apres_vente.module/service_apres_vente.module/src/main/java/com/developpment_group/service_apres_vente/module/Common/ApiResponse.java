@@ -1,4 +1,4 @@
-package com.developpment_group.service_apres_vente.module.Config;
+package com.developpment_group.service_apres_vente.module.Common;
 
 import java.time.LocalDateTime;
 

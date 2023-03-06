@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RequestRepo extends JpaRepository<Request,Long> {
+
+    Request findByOrder(String order);
 }
