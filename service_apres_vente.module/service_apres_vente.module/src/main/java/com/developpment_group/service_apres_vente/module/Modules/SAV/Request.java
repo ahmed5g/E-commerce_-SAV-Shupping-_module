@@ -52,7 +52,7 @@ public class Request {
     private RefundApproval approval;*/
 
 
-    @OneToOne(mappedBy = "request", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "requests", cascade = CascadeType.ALL)
     private RequestApproval approval;
 
 
