@@ -16,7 +16,7 @@ public class RequestApproval {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "approval_id")
-    private int approvalId;
+    private Long approvalId;
 
     @Column(name = "date")
     private LocalDate date;
@@ -39,7 +39,7 @@ public class RequestApproval {
     public RequestApproval() {
     }
 
-    public RequestApproval(int approvalId, LocalDate date, String approvedBy, status requestStatus, Request request) {
+    public RequestApproval(Long approvalId, LocalDate date, String approvedBy, status requestStatus, Request request) {
         this.approvalId = approvalId;
         this.date = date;
         this.approvedBy = approvedBy;
@@ -50,11 +50,11 @@ public class RequestApproval {
     //Generate Getters and setters
 
 
-    public int getApprovalId() {
+    public long getApprovalId() {
         return approvalId;
     }
 
-    public void setApprovalId(int approvalId) {
+    public void setApprovalId(Long approvalId) {
         this.approvalId = approvalId;
     }
 
