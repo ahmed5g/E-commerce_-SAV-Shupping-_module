@@ -15,7 +15,7 @@ public interface ShippingRepo extends JpaRepository<Shipping, Long> {
     @Query("SELECT s FROM Shipping s "
             + "INNER JOIN s.requests_ship r "
             + "WHERE r.requestID = :requestId")
-    List<Shipping> findByRequestId(@Param("requestId") Long requestId);
+    List<Shipping> findByRequestId(@Param("requestId") Long requestId) ;
 
     Optional<Shipping> findById(Long id);
     void deleteById(Long id);

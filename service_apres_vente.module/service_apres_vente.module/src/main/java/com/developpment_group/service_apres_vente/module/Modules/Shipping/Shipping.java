@@ -53,13 +53,11 @@ public class Shipping {
     private String replacement_item;
 
 
-
-    @NotNull
     private status delivery_status;
 
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Request")
+    @JoinColumn(name = "Requests")
     private Request requests_ship;
 
 

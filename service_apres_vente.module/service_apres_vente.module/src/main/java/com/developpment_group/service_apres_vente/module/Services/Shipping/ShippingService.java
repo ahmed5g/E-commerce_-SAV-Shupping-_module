@@ -5,12 +5,14 @@ import com.developpment_group.service_apres_vente.module.Modules.Shipping.Shippi
 import com.developpment_group.service_apres_vente.module.Repositories.ShippingRepo;
 import com.developpment_group.service_apres_vente.module.Services.IServices.IShippingService;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class ShippingService implements IShippingService {
 
+    @Autowired
     private ShippingRepo ShippingRepo;
 
 
@@ -26,6 +28,7 @@ public class ShippingService implements IShippingService {
         try {
             Long requestID = shipping.getRequests_ship().getRequestID();
             List<Shipping> existingShippings = ShippingRepo.findByRequestId(requestID);
+            assert existingShippings != null;
             if (!existingShippings.isEmpty()) {
                 Shipping existingShipping = existingShippings.get(0);
                 existingShipping.setRequests_ship(shipping.getRequests_ship());

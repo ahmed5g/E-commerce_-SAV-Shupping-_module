@@ -1,8 +1,9 @@
-package com.developpment_group.service_apres_vente.module.Controllers.SAVController;
+package com.developpment_group.service_apres_vente.module.Controllers.ShippingController;
 
 import com.developpment_group.service_apres_vente.module.Common.ApiResponse;
 import com.developpment_group.service_apres_vente.module.Modules.SAV.Request;
 import com.developpment_group.service_apres_vente.module.Modules.Shipping.Shipping;
+import com.developpment_group.service_apres_vente.module.Repositories.ShippingRepo;
 import com.developpment_group.service_apres_vente.module.Services.SAVService.RequestService;
 import com.developpment_group.service_apres_vente.module.Services.Shipping.ShippingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,32 @@ public class ShippingController {
 
     @Autowired
     private ShippingService Shipping_Service;
+    @Autowired
+    private ShippingRepo ShippingRepo;
+
+
 
     @PostMapping("/create")
     public ResponseEntity<ApiResponse> createRequest(@Validated @RequestBody Shipping shipping) {
-        if (Objects.nonNull(Shipping_Service.readShipping(shipping.getRequests_ship().getRequestID()))) {
+        Long requestId = shipping.getRequests_ship().getRequestID();
+        List<Shipping> existingShippings = ShippingRepo.findByRequestId(requestId);
+        assert existingShippings != null;
+        if (!existingShippings.isEmpty()) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Shipping already linked with Request"), HttpStatus.CONFLICT);
         }
         Shipping_Service.createShipping(shipping);
         return new ResponseEntity<>(new ApiResponse(true, "Shipping has been successfully Added"), HttpStatus.CREATED);
     }
+
+
+
+    @PostMapping("/Create")
+    public Shipping createShipping(@RequestBody Shipping shipping){
+        return Shipping_Service.createShipping(shipping);
+    }
+
+
+
 
     @GetMapping("/ALL")
     public List<Shipping> ShippingList(){
