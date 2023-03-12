@@ -1,13 +1,24 @@
 package com.developpment_group.service_apres_vente.module.Modules.SAV;
 
 
+import com.developpment_group.service_apres_vente.module.Modules.Shipping.Shipping;
 import jakarta.persistence.*;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import org.springframework.lang.NonNullFields;
 
 import java.time.LocalDate;
 
 
 @Entity(name = "Request")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,21 +28,29 @@ public class Request {
     @Column(name = "Request_date")
     private LocalDate requestDate;
 
+    @NotNull
     @Column(name = "Customer_Name")
     private String customerName;
 
+
+
     @Column(name = "Customer_Email")
+    @Email
     private String customerEmail;
 
+
     @Column(name = "Customer_Address")
+    @NotNull
     private String customerAdress;
 
 
     @Column(name = "Order_ID")
+    @NotNull
     private String order;
 
 
     @Column(name = "Request_Description")
+    @NotNull
     private String Description;
 
 
@@ -55,111 +74,9 @@ public class Request {
     @OneToOne(mappedBy = "requests", cascade = CascadeType.ALL)
     private RequestApproval approval;
 
-
-    //Generate Constructor
-
-    public Request() {
-    }
-    public Request(Long requestID, LocalDate requestDate, String customerName, String customerEmail, String customerAdress, String order, String description, Boolean isApproved) {
-        this.requestID = requestID;
-        this.requestDate = requestDate;
-        this.customerName = customerName;
-        this.customerEmail = customerEmail;
-        this.customerAdress = customerAdress;
-        this.order = order;
-        Description = description;
-        this.isApproved = isApproved;
-    }
+    @OneToOne(mappedBy = "requests_ship", cascade = CascadeType.ALL)
+    private Shipping shipping;
 
 
-    //Generate Getters and setters
 
-    public Long getRequestID() {
-        return requestID;
-    }
-
-    public void setRequestID(Long requestID) {
-        this.requestID = requestID;
-    }
-
-    public LocalDate getRequestDate() {
-        return requestDate;
-    }
-
-    public void setRequestDate(LocalDate requestDate) {
-        this.requestDate = requestDate;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
-
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
-
-    public String getCustomerAdress() {
-        return customerAdress;
-    }
-
-    public void setCustomerAdress(String customerAdress) {
-        this.customerAdress = customerAdress;
-    }
-
-    public String getOrder() {
-        return order;
-    }
-
-    public void setOrder(String order) {
-        this.order = order;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public Boolean getApproved() {
-        return isApproved;
-    }
-
-    public void setApproved(Boolean approved) {
-        isApproved = approved;
-    }
-
-
-    public RequestApproval getApproval() {
-        return approval;
-    }
-
-    public void setApproval(RequestApproval approval) {
-        this.approval = approval;
-    }
-
-    //To String
-
-    @Override
-    public String toString() {
-        return "Request{" +
-                "requestID=" + requestID +
-                ", requestDate=" + requestDate +
-                ", customerName='" + customerName + '\'' +
-                ", customerEmail='" + customerEmail + '\'' +
-                ", customerAdress='" + customerAdress + '\'' +
-                ", order='" + order + '\'' +
-                ", Description='" + Description + '\'' +
-                ", isApproved=" + isApproved +
-                '}';
-    }
 }

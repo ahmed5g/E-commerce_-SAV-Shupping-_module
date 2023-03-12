@@ -1,5 +1,4 @@
-/*
-package com.developpment_group.service_apres_vente.module.Configuration;
+/*package com.developpment_group.service_apres_vente.module.Configuration;
 
 
 import org.springframework.context.annotation.Bean;
@@ -28,7 +27,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo getApiInfo() {
-        Contact contact = new Contact("webtutsplus", "http://webtutsplus.com", "contact.webtutsplus@gmail.com");
+        Contact contact = new Contact("webtutsplus", "http://webtutsplus.com", "ahmed.ghorbel1@esprit.tn");
         return new ApiInfoBuilder()
                 .title("Ecommerce API")
                 .description("Documentation Ecommerce api")
@@ -38,5 +37,4 @@ public class SwaggerConfig {
                 .contact(contact)
                 .build();
     }
-}
-*/
+}*/
