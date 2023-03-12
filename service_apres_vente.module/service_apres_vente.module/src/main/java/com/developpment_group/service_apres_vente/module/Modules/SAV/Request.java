@@ -71,7 +71,7 @@ public class Request {
     private RefundApproval approval;*/
 
 
-    @OneToOne(mappedBy = "requests", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "request", cascade = CascadeType.ALL)
     private RequestApproval approval;
 
 
