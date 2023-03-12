@@ -25,25 +25,6 @@ public class RequestService implements IRequestService {
     //Methods
     public Request readRequest(String order_ID) {return Request_repo.findByOrder(order_ID);}
 
-
-    public Request findByOrder(String order) {return Request_repo.findByOrder(order);}
-
-    public Optional<Request> findById(Long id) {
-        return Request_repo.findById(id);
-    }
-
-
-    public void deleteById(Long id) { Request_repo.deleteById(id);}
-
-
-
-
-
-
-
-
-
-
     //Operations
 
 

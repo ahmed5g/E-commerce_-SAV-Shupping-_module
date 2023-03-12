@@ -11,5 +11,6 @@ public interface RequestRepo extends JpaRepository<Request,Long> {
     Request findByOrder(String order);
 
     Optional<Request> findById(Long requestID);
+    void deleteById(Long id);
 
 }

@@ -74,8 +74,9 @@ public class Request {
     @OneToOne(mappedBy = "requests", cascade = CascadeType.ALL)
     private RequestApproval approval;
 
-    @OneToOne(mappedBy = "requests_ship", cascade = CascadeType.ALL)
-    private Shipping shipping;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Request")
+    private Request requests_ship;
 
 
 
