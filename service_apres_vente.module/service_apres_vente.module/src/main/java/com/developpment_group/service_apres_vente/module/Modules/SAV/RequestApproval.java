@@ -6,10 +6,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-enum status{
-    APPROVED,
-    IN_PROGRESS,
-    REJECTED,
+enum status {
+    APPROVED, IN_PROGRESS, REJECTED,
 }
 
 @Entity(name = "RequestApproval")
@@ -24,17 +22,12 @@ public class RequestApproval {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "approval_id")
     private Long approvalId;
-
-    @Column(name = "date")
     private LocalDate date;
-
-    @Column(name = "approved_by")
     private String approvedBy;
-
-    @Column(name = "Request_State")
     private status RequestStatus;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Request")
     private Request requests;
+
 }
