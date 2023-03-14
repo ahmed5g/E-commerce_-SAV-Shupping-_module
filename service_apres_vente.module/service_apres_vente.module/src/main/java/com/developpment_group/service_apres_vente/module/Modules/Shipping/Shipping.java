@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 @ToString
 @EqualsAndHashCode
 
-public class Shipping {
+public class Shipping implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Shipping_ID")

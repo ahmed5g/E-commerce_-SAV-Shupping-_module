@@ -4,6 +4,7 @@ package com.developpment_group.service_apres_vente.module.Modules.SAV;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 enum status{
@@ -19,7 +20,7 @@ enum status{
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class RequestApproval {
+public class RequestApproval implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "approval_id")
