@@ -1,16 +1,13 @@
 package com.developpment_group.service_apres_vente.module.Modules.SAV;
 
-
 import com.developpment_group.service_apres_vente.module.Modules.Shipping.Shipping;
 import jakarta.persistence.*;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.springframework.lang.NonNullFields;
 
 import java.time.LocalDate;
-
 
 @Entity(name = "Request")
 @Getter
@@ -20,63 +17,38 @@ import java.time.LocalDate;
 @ToString
 @EqualsAndHashCode
 public class Request {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Request_ID")
+    @Column(name = "RequestID")
     private Long requestID;
 
-    @Column(name = "Request_date")
     private LocalDate requestDate;
 
-    @NotNull
-    @Column(name = "Customer_Name")
+    @NotBlank(message = "Customer name is required")
     private String customerName;
 
-
-
-    @Column(name = "Customer_Email")
-    @Email
+    @Email(message = "Invalid email address")
     private String customerEmail;
 
+    @NotBlank(message = "Customer address is required")
+    private String customerAddress;
 
-    @Column(name = "Customer_Address")
-    @NotNull
-    private String customerAdress;
-
-
-    @Column(name = "Order_ID")
-    @NotNull
+    @NotBlank(message = "Order is required")
     private String order;
 
+    @NotBlank(message = "Description is required")
+    private String description;
 
-    @Column(name = "Request_Description")
-    @NotNull
-    private String Description;
-
-
-    @Column(name = "IsApproved")
     private Boolean isApproved;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")*/
 
 
-    /*@OneToMany(mappedBy = "RefundRequest", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;*/
-
-
-    ////////////////////////////////////////////////////////////////
-
-    /*@OneToOne(mappedBy = "request", cascade = CascadeType.ALL)
-    private RefundApproval approval;*/
-
+    //Relations
 
     @OneToOne(mappedBy = "request", cascade = CascadeType.ALL)
     private RequestApproval approval;
 
-
-    @OneToOne(mappedBy = "requests_ship", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "requests", cascade = CascadeType.ALL)
     private Shipping shipping;
-
-
 }

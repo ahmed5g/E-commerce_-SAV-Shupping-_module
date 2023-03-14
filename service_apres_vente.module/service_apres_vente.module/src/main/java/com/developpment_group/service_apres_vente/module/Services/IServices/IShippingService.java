@@ -14,5 +14,4 @@ public interface IShippingService {
 
     void GetShippingByID(Long shippingID);
     void clearShipping(Long shippingID);
-
 }
