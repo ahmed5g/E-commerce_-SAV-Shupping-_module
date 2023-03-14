@@ -28,6 +28,7 @@ public class RequestApproval {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Request")
+
     private Request requests;
 
 }
