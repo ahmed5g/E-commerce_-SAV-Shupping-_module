@@ -1,16 +1,14 @@
 package com.developpment_group.service_apres_vente.module.Modules.SAV;
 
-
 import com.developpment_group.service_apres_vente.module.Modules.Shipping.Shipping;
 import jakarta.persistence.*;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 
 @Entity(name = "Request")
 @Getter
@@ -26,40 +24,29 @@ public class Request implements Serializable {
     private Long requestID;
 
     @Column(name = "Date")
+
     private LocalDate requestDate;
 
-    @NotNull
-    @Column(name = "Customer_Name")
+    @NotBlank(message = "Customer name is required")
     private String customerName;
 
-
-
-    @Column(name = "Customer_Email")
-    @Email
+    @Email(message = "Invalid email address")
     private String customerEmail;
 
+    @NotBlank(message = "Customer address is required")
+    private String customerAddress;
 
-    @Column(name = "Customer_Address")
-    @NotNull
-    private String customerAdress;
-
-
-    @Column(name = "Order_ID")
-    @NotNull
+    @NotBlank(message = "Order is required")
     private String order;
 
+    @NotBlank(message = "Description is required")
+    private String description;
 
-    @Column(name = "Request_Description")
-    @NotNull
-    private String Description;
-
-
-    @Column(name = "IsApproved")
     private Boolean isApproved;
 
 
 
-    @OneToOne(mappedBy = "requests_ship", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "requests", cascade = CascadeType.ALL)
     private Shipping shipping;
 
     public boolean setApprovalStatus(status requestStatus) {
@@ -71,6 +58,4 @@ public class Request implements Serializable {
             return false;
         }
     }
-
-
 }

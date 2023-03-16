@@ -49,6 +49,7 @@ public class RequestService implements IRequestService {
                 updatedRequest.setIsApproved(request.getIsApproved());
                 updatedRequest.setOrder(request.getOrder());
                 updatedRequest.setDescription(request.getDescription());
+                updatedRequest.setRequestID(request.getRequestID());
                 return Request_repo.save(updatedRequest);
             } else {
                 throw new RuntimeException("Request with ID " + id + " not found");
@@ -65,7 +66,7 @@ public class RequestService implements IRequestService {
         return Request_repo.findAll();
     }
 
-    public void  GetRequestByID(Long requestID){
+    public void GetRequestByID(Long requestID){
         Request_repo.findById(requestID);
     }
 
