@@ -7,7 +7,6 @@ import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.springframework.lang.NonNullFields;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -23,10 +22,10 @@ import java.time.LocalDate;
 public class Request implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Request_ID")
+    @Column(name = "ID")
     private Long requestID;
 
-    @Column(name = "Request_date")
+    @Column(name = "Date")
     private LocalDate requestDate;
 
     @NotNull
@@ -58,26 +57,20 @@ public class Request implements Serializable {
     @Column(name = "IsApproved")
     private Boolean isApproved;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")*/
-
-
-    /*@OneToMany(mappedBy = "RefundRequest", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;*/
-
-
-    ////////////////////////////////////////////////////////////////
-
-    /*@OneToOne(mappedBy = "request", cascade = CascadeType.ALL)
-    private RefundApproval approval;*/
-
-
-    @OneToOne(mappedBy = "requests", cascade = CascadeType.ALL)
-    private RequestApproval approval;
 
 
     @OneToOne(mappedBy = "requests_ship", cascade = CascadeType.ALL)
     private Shipping shipping;
+
+    public boolean setApprovalStatus(status requestStatus) {
+        if (requestStatus == status.APPROVED) {
+            this.isApproved = true;
+            return true;
+        } else {
+            this.isApproved = false;
+            return false;
+        }
+    }
 
 
 }

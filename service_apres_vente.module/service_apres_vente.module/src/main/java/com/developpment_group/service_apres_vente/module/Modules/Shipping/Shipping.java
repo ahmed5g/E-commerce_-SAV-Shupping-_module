@@ -22,7 +22,7 @@ import java.time.LocalDate;
 public class Shipping implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Shipping_ID")
+    @Column(name = "ID")
     private Long Shipping_ID;
 
     @Column(name = "Shipping_date")
@@ -50,7 +50,7 @@ public class Shipping implements Serializable {
 
 
     @NotNull
-    @Column(name = "replacement_item")
+    @Column(name = "Items")
     private String replacement_item;
 
 
