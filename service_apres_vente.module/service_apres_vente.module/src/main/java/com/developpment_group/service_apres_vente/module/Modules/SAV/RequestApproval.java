@@ -4,11 +4,10 @@ package com.developpment_group.service_apres_vente.module.Modules.SAV;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-enum status {
-    APPROVED, IN_PROGRESS, REJECTED,
-}
+
 
 @Entity(name = "RequestApproval")
 @Getter
@@ -17,18 +16,25 @@ enum status {
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class RequestApproval {
+public class RequestApproval implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "approval_id")
+    @Column(name = "ID")
     private Long approvalId;
+
+
+    @Column(name = "Date")
     private LocalDate date;
+
+    @Column(name = "Approved_by")
+
     private String approvedBy;
     private status RequestStatus;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Request")
 
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Request requests;
 
 }
+

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity(name = "Request")
@@ -16,12 +17,13 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Request {
-
+public class Request implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "RequestID")
+    @Column(name = "ID")
     private Long requestID;
+
+    @Column(name = "Date")
 
     private LocalDate requestDate;
 
@@ -44,11 +46,16 @@ public class Request {
 
 
 
-    //Relations
-
-    @OneToOne(mappedBy = "request", cascade = CascadeType.ALL)
-    private RequestApproval approval;
-
     @OneToOne(mappedBy = "requests", cascade = CascadeType.ALL)
     private Shipping shipping;
+
+    public boolean setApprovalStatus(status requestStatus) {
+        if (requestStatus == status.APPROVED) {
+            this.isApproved = true;
+            return true;
+        } else {
+            this.isApproved = false;
+            return false;
+        }
+    }
 }

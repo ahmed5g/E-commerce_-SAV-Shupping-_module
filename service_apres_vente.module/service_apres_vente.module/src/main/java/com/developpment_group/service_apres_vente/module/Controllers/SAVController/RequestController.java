@@ -45,4 +45,16 @@ public class RequestController {
     public void deleteRequest(@PathVariable("requestID") Long orderId){
         Request_Service.clearRequest(orderId);
     }
+
+
+    // Read Request by status
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<Request>> readRequestByStatus(@PathVariable("status") boolean status) {
+        try {
+            List<Request> requests = Request_Service.GetAllRequestsByStatus(status);
+            return new ResponseEntity<>(requests, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

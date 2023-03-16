@@ -7,6 +7,7 @@ import com.developpment_group.service_apres_vente.module.Services.IServices.IReq
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,4 +74,14 @@ public class RequestService implements IRequestService {
         Request_repo.deleteById(requestID);
 
     }
+
+
+
+    //SORTING BY REQUEST STATUS
+    public List<Request> GetAllRequestsByStatus(boolean isApproved) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "requestDate");
+        return Request_repo.findByIsApproved(isApproved, sort);
+    }
+
+
 }
