@@ -57,10 +57,7 @@ public class Shipping implements Serializable {
     private status delivery_status;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Requests")
-    private Request requests_ship;
-
-
-
+    @OneToOne
+    @JoinColumn(name = "Request_id")
+    private Request requests;
 }
